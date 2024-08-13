@@ -104,7 +104,6 @@ Note: `super_predicter_daisy.py` does not accept a `config.py` args yet! Hence, 
 > Output segmentations are saved in the same output zarr under `lsd_outputs` containing `volumes/pred_affs`.
 > Agglomeration thresholds are appended to dataset names: `volumes/segmentation_055`
 
-
 <details>
 <summary> Extract supervoxels and agglomerate for small ROIs with <a href="instance_segmenter.py">instance_segmenter.py</a></summary>
 
@@ -191,6 +190,10 @@ python 05_extract_segmentation_from_lut.py daisy_logs/config_0.yml
 
 >[!NOTE]
 > Small Rois can be proofread with Napari-based [Seg2Link](https://github.com/Mohinta2892/Seg2Link.git).
+
+>[!NOTE]
+> If running only inference with pretrained model, follow [steps](https://github.com/Mohinta2892/catena/blob/dev/local_shape_descriptors/docs/source/neuron_segmentation/inference_w_pretrained.rst).
+
 
 ## Performance of LSDs on held-out (in-distribution) and out-of-distribution datasets
 

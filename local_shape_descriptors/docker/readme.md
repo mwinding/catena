@@ -8,7 +8,7 @@
    1. You can pull the latest docker image from DockerHub. This will load the image onto your local memory.
 
       ```
-      docker pull mohinta2892/lsd_sheridan_pytorch:22.01-py3
+      docker pull mohinta2892/lsd_sheridan_pytorch:24.04-py3
       ``` 
 
    2. You can build the docker image yourself:

@@ -124,6 +124,25 @@ For Small volumes Watershed and Agglomeration happen at the same time
 For Large volumes Watershed and Agglomeration have to be run separately
 ~~~~~~~~~~~~
 
+.. note::
+   :class: red-note
+
+    MongoDB installation is mandatory for this to work.
+
+Watershed:
+
 .. code-block:: python
 
-  python instance_segmenter.py -c config_predict.py
+  python 02_extract_fragments_blockwise.py -c config_predict.py
+
+Agglomerate:
+
+.. code-block:: python
+
+  python 03_agglomerate_blockwise.py -c config_predict.py
+
+Extract Instances:
+
+.. code-block:: python
+
+   python 04_find_segments_full.py daisy_logs/config_0.yml

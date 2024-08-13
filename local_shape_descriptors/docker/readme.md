@@ -22,10 +22,14 @@
 > `/catena/local_shape_descriptors` is the context given to the docker. Meaning of [commands](https://docs.docker.com/reference/cli/docker/image/build/)
 
 ### Running the code within the docker
-
 ```
-nvidia-docker run --shm-size 128gb --pids-limit -1 -it -u `id -u`:`id -g` -v `pwd`:`pwd` -w `pwd` -v /path/to/codendata:/home --network=host lsd_sheridan_pytorch:22.01-py3
+docker run --shm-size 128gb --gpus all --pids-limit -1 -it -u `id -u`:`id -g` -v `pwd`:`pwd` -w `pwd` -v /path/to/codendata:/home --network=host lsd_sheridan_pytorch:22.01-py3
 ```
+>[!WARNING]
+> For backwards compatibility with Old systems still supporting nvidia-docker wrappers, run the below command with `nvidia-docker`:
+> ```
+> nvidia-docker run --shm-size 128gb --pids-limit -1 -it -u `id -u`:`id -g` -v `pwd`:`pwd` -w `pwd` -v /path/to/codendata:/home --network=host > lsd_sheridan_pytorch:22.01-py3
+> ```
 <details>
 <summary><strong>Command Explanation</strong></summary>
 

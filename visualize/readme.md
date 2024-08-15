@@ -15,9 +15,11 @@
     <summary> Verify Napari GUI loads</summary>
     <br>
      
-    ```bash
+    ```
+    
     conda activate napari-env
     napari
+    
     ```
 </details>
 

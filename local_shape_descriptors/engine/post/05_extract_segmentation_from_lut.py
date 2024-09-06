@@ -163,10 +163,10 @@ if __name__ == "__main__":
     # config_file = sys.argv[1]  # take one of the worker config files from daisy_logs??
     parser = argparse.ArgumentParser()
     parser.add_argument('-c', help="Please provide a config file."
-                                   " You can grab one from the local_shape_descriptors/daisy_logs folder!")
-    parser.add_argument('-mf', '--merge_function', default='hist_quant50',
+                                   " You can grab one yaml file like `local_shape_descriptors/daisy_logs/config_0.yaml`!")
+    parser.add_argument('-mf', '--merge_function', default='hist_quant_50',
                         help="Merge function as agglomerate threshold (e.g., hist_quant_50, hist_quant_60)")
-    parser.add_argument('-th', '--threshold', default=0.3, type=float,
+    parser.add_argument('-th', '--threshold', default=0.1, type=float,
                         help=" Threshold to fetch a LUT like hist_quant{agglomerate_threshold}_{this_threshold}")
 
     args = parser.parse_args()
@@ -183,7 +183,7 @@ if __name__ == "__main__":
     sample_name = cfg.DATA.SAMPLE_NAME
     db_host = cfg.DATA.DB_HOST
     db_name = cfg.DATA.DB_NAME
-    merge_function = args.mf  # 'hist_quant_60'
+    merge_function = args.merge_function  # 'hist_quant_60'
 
     chunk_calc = da.from_zarr(cfg.DATA.SAMPLE, component=cfg.INS_SEGMENT.OUT_FRAGS_DS).chunksize
     # print( cfg.MODEL.VOXEL_SIZE)
@@ -194,10 +194,10 @@ if __name__ == "__main__":
         fragments_file=cfg.DATA.SAMPLE,
         fragments_dataset=cfg.INS_SEGMENT.OUT_FRAGS_DS,
         edges_collection=sample_name + "_edges_" + merge_function,
-        threshold=args.th,  # 0.3 ;  this will fetch the of hist_quant{agglomerate_threshold}_{this_threshold}
+        threshold=args.threshold,  # 0.3 ;  this will fetch the of hist_quant{agglomerate_threshold}_{this_threshold}
         block_size=Coordinate(chunk_calc),  # is chunksize multiple in voxels, change as seen fit??
         out_file=cfg.DATA.SAMPLE,
-        out_dataset=f'volumes/final_segmentation_{merge_function}',
+        out_dataset=f'volumes/final_segmentation_{merge_function}_{int(args.threshold*100)}',
         num_workers=cfg.SYSTEM.NUM_WORKERS,
         roi_offset=None,
         roi_shape=None,

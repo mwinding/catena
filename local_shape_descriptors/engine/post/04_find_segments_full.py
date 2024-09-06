@@ -180,7 +180,7 @@ if __name__ == "__main__":
     sample_name = cfg.DATA.SAMPLE_NAME
     db_host = cfg.DATA.DB_HOST
     db_name = cfg.DATA.DB_NAME
-    merge_function = 'hist_quant_60'  # cfg.INS_SEGMENT.MERGE_FUNCTION - hardcoded for testing
+    merge_function = 'hist_quant_50'  # cfg.INS_SEGMENT.MERGE_FUNCTION - hardcoded for testing
 
     find_segments(
         db_host,

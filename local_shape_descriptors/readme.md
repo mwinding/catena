@@ -20,6 +20,11 @@ Read these:
 
 ### Usage instructions
 
+>[!IMPORTANT]
+> If you want to only run inference with pretrained model, follow [steps](https://github.com/Mohinta2892/catena/blob/dev/local_shape_descriptors/docs/source/neuron_segmentation/inference_w_pretrained.rst).
+
+
+
 #### Semantic Segmentation to get the affinity maps
 
 <details close>
@@ -191,8 +196,6 @@ python 05_extract_segmentation_from_lut.py daisy_logs/config_0.yml
 >[!NOTE]
 > Small Rois can be proofread with Napari-based [Seg2Link](https://github.com/Mohinta2892/Seg2Link.git).
 
->[!NOTE]
-> If running only inference with pretrained model, follow [steps](https://github.com/Mohinta2892/catena/blob/dev/local_shape_descriptors/docs/source/neuron_segmentation/inference_w_pretrained.rst).
 
 
 ## Performance of LSDs on held-out (in-distribution) and out-of-distribution datasets

@@ -23,6 +23,7 @@ from funlib.geometry import Roi, Coordinate
 from funlib.persistence import open_ds
 import subprocess
 from re import sub
+import argparse
 
 # add current directory to path and allow absolute imports
 sys.path.insert(0, '.')
@@ -214,7 +215,19 @@ def rename_keys(original_config, key_mapping):
 
 if __name__ == "__main__":
 
-    cfg = get_cfg_defaults()
+    parser = argparse.ArgumentParser("You can pass an explicit config file to train.")
+    parser.add_argument('-c', default=None, help='Pass the config file"!')
+    args = parser.parse_args()
+    config_file = args.c
+    if config_file is not None:
+        # parse the args file to become cfg
+        cfg = CN()
+        # Allow creating new keys recursively.: https://github.com/rbgirshick/yacs/issues/25
+        cfg.set_new_allowed(True)
+        cfg.merge_from_file(config_file)
+    else:
+        cfg = get_cfg_defaults()
+
     # can be used to override pre-defined settings
     if os.path.exists("./experiment.yaml"):
         cfg.merge_from_file("experiment.yaml")
@@ -242,6 +255,7 @@ if __name__ == "__main__":
     agglomerate_until = agglomerate_until[
         np.argwhere(agglomerate_until > round(cfg.INS_SEGMENT.EPSILON_AGGLOMERATE, 2))].flatten()
 
+    # for loop over every agglomeration threshold?
     # for agglom_next in agglomerate_until:
     agglom_next = agglomerate_until[0]
     cfg.INS_SEGMENT.THRESHOLD = float(agglom_next)

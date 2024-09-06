@@ -159,7 +159,7 @@ python 03_agglomerate_blockwise.py
 ##### Final steps to extract final segmentation for LARGE volumes
 
 <details>
-<summary> Finding all segments and saving them as Look-Up-Tables (LUTs) <a href="04_find_segments_full.py">04_find_segments_full.py</a></summary>
+<summary> Finding all segments and saving them as Look-Up-Tables (LUTs) <a href="engine/post/04_find_segments_full.py">04_find_segments_full.py</a></summary>
 
 > **WARNING** <br>
 > This cannot be run if `03_agglomerate_blockwise.py` has not been run. <br>
@@ -174,7 +174,7 @@ python 04_find_segments_full.py daisy_logs/config_0.yml
 </details>
 
 <details>
-<summary> Extracting a final segmentation <a href="05_extract_segmentation_from_lut.py">05_extract_segmentation_from_lut.py</a></summary>
+<summary> Extracting a final segmentation <a href="engine/post/05_extract_segmentation_from_lut.py">05_extract_segmentation_from_lut.py</a></summary>
 
 > **WARNING** <br>
 > This cannot be run if `04_find_segments_full.py` has not been run. <br>

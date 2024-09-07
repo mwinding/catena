@@ -168,13 +168,13 @@ python 03_agglomerate_blockwise.py
 
 > **WARNING** <br>
 > This cannot be run if `03_agglomerate_blockwise.py` has not been run. <br>
-> **Don't forget to pass `daisy_logs/config_0.yml` from your daisy_logs folder auto-created under `catena/local_shape_descriptors`.** <br>
+> **Don't forget to pass `daisy_logs/{filename}_pred_affs/config_0.yaml` from your daisy_logs folder auto-created under `catena/local_shape_descriptors`.** <br>
 > Output LUTs are saved under `lsd_outputs`
 
 <strong> Create a LUT file </strong> <br>
 
 ```
-python 04_find_segments_full.py daisy_logs/config_0.yml
+python 04_find_segments_full.py daisy_logs/{filename}_fragments/config_0.yaml
 ```
 </details>
 
@@ -189,7 +189,7 @@ python 04_find_segments_full.py daisy_logs/config_0.yml
 <strong> Extract Segments from LUT </strong> <br>
 
 ```
-python 05_extract_segmentation_from_lut.py daisy_logs/config_0.yml
+python 05_extract_segmentation_from_lut.py daisy_logs/{filename}_fragments/config_0.yaml
 ```
 </details>
 

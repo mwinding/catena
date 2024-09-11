@@ -1,10 +1,15 @@
 ### Installation
 
 - Install [Anaconda](https://docs.anaconda.com/free/anaconda/install/index.html)/[Miniconda](https://docs.anaconda.com/free/miniconda/miniconda-install/)
-- Make a conda env by running (use the `environment_napari.yml` file):
+- Make a conda env for NAPARI by running (use the `environment_napari.yml` file):
   ###### this will install the particular napari version as mentioned in the yml
   ```bash
   conda env create -f environment_napari.yml -n napari-env 
+  ```
+- Make a conda env for NEUROGLANCER by running (use the `environment_neuroglancer.yml` file):
+  ###### this will install the particular neuroglander version as mentioned in the yml. You may update neuroglancer, but code execution is not guaranteed.
+  ```bash
+  conda env create -f environment_neuroglancer.yml -n nglancer 
   ```
 
 > [!WARNING]  
@@ -23,7 +28,19 @@
     ```
 </details>
 
-### Usage
+<details close>
+    <summary> Verify Neuroglancer loads via import </summary>
+    <br>
+     
+    ```
+    
+    conda activate nglancer
+    python -c "import neuroglancer"
+    
+    ```
+</details>
+
+### Usage: NAPARI
 
 Once `Napari` is installed successfully, you can run `visualise_napari.py`:
 
@@ -60,3 +77,16 @@ Once `Napari` is installed successfully, you can run `visualise_napari.py`:
    conda activate napari-env
    cd catena/visualize/visualise_napari.py -f /path/to/zarr -sf 60 -st 150 #2D slices 60 to 150 across all datasets
   ```
+
+### Usage: Neuroglancer
+> [!WARNING]
+> All data is expected to be 3D (or 4D for predicted affinities) per the example script. 
+
+- You must edit `nglancer_pyconnectomics_example.py` to suit your datasets that you want to visualise. **This is currently an example script**. Specially,
+```bash
+  raw_file: pass your own file with contains raw EM
+  scales: change the scales which are set as 8nm in zyx
+  names: change the zyx to xyz if your data is in that format
+```
+- The script expects an affinity dataset and a segmentation. Our raws generally contain `raw`, `pred_affs` and `segmentation` in the same `zarr` file.
+You must either comment these lines or provide the files with these datasets to plot them in neuroglancer.

@@ -167,7 +167,19 @@ def get_connected_components(
 
 
 if __name__ == "__main__":
-    config_file = sys.argv[1]  # take one of the worker config files from daisy_logs??
+    # config_file = sys.argv[1]  # take one of the worker config files from daisy_logs??
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-c', help="Please provide a config file."
+                                   " You can grab one yaml file like `local_shape_descriptors/daisy_logs/config_0.yaml`!")
+    parser.add_argument('-mf', '--merge_function', default='hist_quant_50',
+                        help="Merge function as agglomerate threshold (e.g., hist_quant_50, hist_quant_60)")
+    parser.add_argument('-th', '--threshold', default=0.1, type=float,
+                        help=" Threshold to fetch a LUT like hist_quant{agglomerate_threshold}_{this_threshold}."
+                             " Default is 0.1.")
+
+    args = parser.parse_args()
+    config_file = args.c
 
     # parse the args file to become cfg
     cfg = CN()
@@ -180,7 +192,8 @@ if __name__ == "__main__":
     sample_name = cfg.DATA.SAMPLE_NAME
     db_host = cfg.DATA.DB_HOST
     db_name = cfg.DATA.DB_NAME
-    merge_function = 'hist_quant_50'  # cfg.INS_SEGMENT.MERGE_FUNCTION - hardcoded for testing
+    # 'hist_quant_50': can be hardcoded for testing. Give preference to passed value over the config file value
+    merge_function = args.merge_function  # if args.merge_function != cfg.INS_SEGMENT.MERGE_FUNCTION else cfg.INS_SEGMENT.MERGE_FUNCTION
 
     find_segments(
         db_host,
@@ -188,7 +201,7 @@ if __name__ == "__main__":
         fragments_file=cfg.DATA.SAMPLE,
         edges_collection=sample_name + "_edges_" + merge_function,
         thresholds_minmax=[0.1, 0.8],  # hardcoded: don't know what this means??
-        thresholds_step=0.1,
+        thresholds_step=args.threshold,  # 0.1,
         fragments_ds=cfg.INS_SEGMENT.OUT_FRAGS_DS,
         roi_offset=None,
         roi_shape=None, )

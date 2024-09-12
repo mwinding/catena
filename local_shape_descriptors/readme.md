@@ -173,8 +173,10 @@ python 03_agglomerate_blockwise.py
 
 <strong> Create a LUT file </strong> <br>
 
+Note: `hist_quant_50` must exist in the db as a collection. If not, check your config file to find at what is the starting value of `_C.INS_SEGMENT.THRESHOLDS`, that is your `hist_quant_{value_in_decimals * 100}`. Example: for `_C.INS_SEGMENT.THRESHOLDS = np.arange(0.35, 0.80, 0.05).tolist()`, you should pass `-mf hist_quant_35`.
+
 ```
-python 04_find_segments_full.py daisy_logs/{filename}_fragments/config_0.yaml
+python 04_find_segments_full.py -c daisy_logs/{filename}_fragments/config_0.yaml -mf hist_quant_50 -th 0.7
 ```
 </details>
 
@@ -188,8 +190,9 @@ python 04_find_segments_full.py daisy_logs/{filename}_fragments/config_0.yaml
 
 <strong> Extract Segments from LUT </strong> <br>
 
+Note: `hist_quant_50` must exist in the db as a collection. If not, check your config file to find at what is the starting value of `_C.INS_SEGMENT.THRESHOLDS`, that is your `hist_quant_{value_in_decimals * 100}`. Example: for `_C.INS_SEGMENT.THRESHOLDS = np.arange(0.35, 0.80, 0.05).tolist()`, you should pass `-mf hist_quant_35`.
 ```
-python 05_extract_segmentation_from_lut.py daisy_logs/{filename}_fragments/config_0.yaml
+python 05_extract_segmentation_from_lut.py -c daisy_logs/{filename}_fragments/config_0.yaml -mf hist_quant_50 -th 0.7
 ```
 </details>
 

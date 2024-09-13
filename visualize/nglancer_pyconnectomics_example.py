@@ -7,7 +7,7 @@ from funlib.geometry import Roi
 from collections import OrderedDict
 import dask.array as da
 
-ip = '0.0.0.0'  # or public IP of the machine for sharable display
+ip = 'localhost'  # or public IP of the machine for sharable display; # added localhost here 2024-09-13
 port = 9999  # change to an unused port number
 neuroglancer.set_server_bind_address(bind_address=ip, bind_port=port)
 viewer = neuroglancer.Viewer()
@@ -32,9 +32,9 @@ res1 = set_coordinate_space(
     units=['', 'nm', 'nm', 'nm'],
     scales=[1, 8, 8, 8])
 
-raw_file = "/media/samia/DATA/ark/lsd_outputs/AFF/3d/run-aclsd-together/segmented/crop_A1_z16655-17216_y13231-13903_x7650-8468.zarr"
+raw_file = r"/Users/windinm/The Francis Crick Dropbox/Michael Winding/Private-WindingM/_data/EM_data/Samia-segmentation_Crick/predictions/7/P667_EM04767_7_ESB_crop.zarr" # added on 2024-09-13
 raw = open_ds(raw_file, "volumes/raw").data
-seg = open_ds(raw_file, "volumes/segmentation_055").data
+seg = open_ds(raw_file, "volumes/final_segmentation_hist_quant_50_70").data # pick segmentation name in folder you are loading and take that name
 aff = open_ds(raw_file, "volumes/pred_affs").data
 d_seg = da.from_array(seg, chunks='auto')
 d_raw = da.from_array(raw, chunks='auto')
@@ -67,9 +67,9 @@ with viewer.txn() as s:
     s.layers["segmentation"].tab = "segments"
     s.selectedLayer.size = 500  # sets the width of the right hand panel
 
-    s.layers["segmentation"].skeletonRendering = \
-        OrderedDict([('mode2d', 'lines_and_points'), ('mode3d', 'lines')])
-    s.layers["segmentation"].segments = unique_equivalences.compute()  # compute this dask array here
+    # s.layers["segmentation"].skeletonRendering = \
+    #     OrderedDict([('mode2d', 'lines_and_points'), ('mode3d', 'lines')])
+    # s.layers["segmentation"].segments = unique_equivalences.compute()  # compute this dask array here
 
 if __name__ == '__main__':
     ap = argparse.ArgumentParser()

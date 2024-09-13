@@ -7,7 +7,7 @@ from funlib.geometry import Roi
 from collections import OrderedDict
 import dask.array as da
 
-ip = 'localhost'  # or public IP of the machine for sharable display; # added localhost here 2024-09-13
+ip = 'localhost'  # or public IP of the machine for sharable display; # added localhost for macOS
 port = 9999  # change to an unused port number
 neuroglancer.set_server_bind_address(bind_address=ip, bind_port=port)
 viewer = neuroglancer.Viewer()
@@ -32,7 +32,7 @@ res1 = set_coordinate_space(
     units=['', 'nm', 'nm', 'nm'],
     scales=[1, 8, 8, 8])
 
-raw_file = r"/Users/windinm/The Francis Crick Dropbox/Michael Winding/Private-WindingM/_data/EM_data/Samia-segmentation_Crick/predictions/7/P667_EM04767_7_ESB_crop.zarr" # added on 2024-09-13
+raw_file = r"/Users/windinm/The Francis Crick Dropbox/Michael Winding/Private-WindingM/_data/EM_data/Samia-segmentation_Crick/predictions/7/P667_EM04767_7_ESB_crop.zarr"
 raw = open_ds(raw_file, "volumes/raw").data
 seg = open_ds(raw_file, "volumes/final_segmentation_hist_quant_50_70").data # pick segmentation name in folder you are loading and take that name
 aff = open_ds(raw_file, "volumes/pred_affs").data
